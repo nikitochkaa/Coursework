@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dictionary</title>
+</head>
+<body>
+<h2>Dictionaries:</h2>
+<div th:each="dictionary : ${editDictionaries}">
+    <form method="post" th:action="@{'/dictionaries/editDictionaries/delete/'+${dictionary.getId()}}">
+        <input type="image" src="/static/trash.svg">
+        <a th:text="${dictionary.getTitle()}"></a>
+    </form>
+</div>
+
+<form method="post" action="/dictionaries/editDictionaries">
+    <label>
+        <input placeholder="Dictionary name" name="title">
+    </label>
+    ,
+    <label>
+        <input placeholder="Language1" name="languageName1">
+    </label>
+    -
+    <label>
+        <input placeholder="Language2" name="languageName2">
+    </label>
+    <button>Create</button>
+</form>
+<form method="get" action="/dictionaries">
+    <button>Save changes</button>
+</form>
+</body>
+</html>

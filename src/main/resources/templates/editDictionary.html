@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${editDictionary.getTitle()}">Dictionary</title>
+</head>
+<body>
+<h3>Language:</h3>
+<form id="form" method="get" th:action="@{'/dictionaries/'+${editDictionary.getId()}+'/editDictionary'}"
+      th:object="${editDictionary}">
+    <label>
+        <select name="languageName" onchange="document.getElementById('form').submit()">
+            <option selected hidden th:value="${language.getName()}" th:text="${language.getName()}">LanguageSelected
+            </option>
+            <option th:value="${editDictionary.getLanguage1.getName}" th:text="${editDictionary.getLanguage1.getName}">
+                Language1
+            </option>
+            <option th:value="${editDictionary.getLanguage2.getName}" th:text="${editDictionary.getLanguage2.getName}">
+                Language2
+            </option>
+        </select>
+    </label>
+</form>
+
+<div th:each="word : ${language.getWordList()}">
+    <form method="post"
+          th:action="@{'/dictionaries/'+${editDictionary.getId()}+'/editDictionary/delete/'+${word.getId}}">
+        <input type="image" src="/static/trash.svg">
+        <a th:text="${word.getText()}+' - '+${word.getTranslation().getText()}"></a>
+    </form>
+</div>
+
+<form method="post" th:action="@{'/dictionaries/'+${editDictionary.getId()}+'/editDictionary'}" th:object="${language}">
+    <label>
+        <input placeholder="Word" name="text">
+    </label>
+    <label>
+        <input placeholder="Translation" name="translation">
+    </label>
+    <button>Add word</button>
+</form>
+
+<form method="get" th:action="@{'/dictionaries/'+${editDictionary.getId()}}">
+    <button>Save changes</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dictionary</title>
+</head>
+<body>
+<h2>Dictionaries:</h2>
+<div th:each="dictionary : ${dictionaries}">
+        <a th:href="@{'/dictionaries/'+${dictionary.getId()}}" th:text="${dictionary.getTitle()}"></a>
+</div>
+
+<br>
+
+<form th:if = "${isAdmin}" method="get" action="/dictionaries/editDictionaries">
+    <button>Edit</button>
+</form>
+
+</body>
+</html>

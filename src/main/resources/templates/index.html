@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign in</title>
+</head>
+<body>
+<h3>User:</h3>
+<form method="post" action="/logIn">
+    <label>
+        <input autocomplete="off" placeholder="Enter Username" name="username" th:value="root"
+               required>
+    </label>
+    <br>
+    <label>
+        <input autocomplete="off" placeholder="Enter Password" name="password" type="password" th:value="password"
+               required>
+    </label>
+    <button>Sign In</button>
+</form>
+<br>
+<form method="post" action="/continueAsGuest">
+    <button>Continue as guest</button>
+</form>
+</body>
+</html>

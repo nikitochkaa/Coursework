@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${dictionary.getTitle()}">Dictionary</title>
+</head>
+<body>
+<h3>Language:</h3>
+<form id="form" method="get" th:action="@{'/dictionaries/'+${dictionary.getId()}}" th:object="${dictionary}">
+    <label>
+        <select name="languageName" onchange="document.getElementById('form').submit()">
+            <option selected hidden th:value="${language.getName()}" th:text="${language.getName()}">LanguageSelected
+            </option>
+            <option th:value="${dictionary.getLanguage1.getName}" th:text="${dictionary.getLanguage1.getName}">Language1
+            </option>
+            <option th:value="${dictionary.getLanguage2.getName}" th:text="${dictionary.getLanguage2.getName}">Language2
+            </option>
+        </select>
+    </label>
+</form>
+
+<br>
+
+<div th:each="word : ${language.getWordList()}">
+    <a th:text="${word.getText()}+' - '+${word.getTranslation().getText()}"></a>
+</div>
+
+<br>
+
+<form method="get" th:action="@{'/dictionaries'}">
+    <button>Back to dictionaries</button>
+</form>
+
+<form th:if="${isAdmin}" method="get" th:action="@{'/dictionaries/'+${dictionary.getId()}+'/editDictionary'}">
+    <button>Edit</button>
+</form>
+
+
+</body>
+</html>
